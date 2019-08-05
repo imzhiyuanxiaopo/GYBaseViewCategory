@@ -8,7 +8,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = 'GYViewCategory'
-  spec.version      = '0.1.0'
+  spec.version      = '0.0.1'
   spec.summary      = '常见控件的分类'
   spec.description  = 'UILabel UIButton UITextField UITextView 的常用属性的分类  采用链式编程'
 
