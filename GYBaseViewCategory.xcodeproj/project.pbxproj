@@ -23,7 +23,7 @@
 
 /* Begin PBXFileReference section */
 		2628B91122F802520046D847 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		26C55CC722F6C05100D36C94 /* GYViewCategory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GYViewCategory.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		26C55CC722F6C05100D36C94 /* GYBaseViewCategory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GYBaseViewCategory.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		26C55CCA22F6C05100D36C94 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		26C55CCB22F6C05100D36C94 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		26C55CCD22F6C05100D36C94 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
@@ -61,7 +61,7 @@
 			isa = PBXGroup;
 			children = (
 				2628B91122F802520046D847 /* Default-568h@2x.png */,
-				26C55CC922F6C05100D36C94 /* GYViewCategory */,
+				26C55CC922F6C05100D36C94 /* GYBaseViewCategory */,
 				26C55CC822F6C05100D36C94 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -69,12 +69,12 @@
 		26C55CC822F6C05100D36C94 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				26C55CC722F6C05100D36C94 /* GYViewCategory.app */,
+				26C55CC722F6C05100D36C94 /* GYBaseViewCategory.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		26C55CC922F6C05100D36C94 /* GYViewCategory */ = {
+		26C55CC922F6C05100D36C94 /* GYBaseViewCategory */ = {
 			isa = PBXGroup;
 			children = (
 				26C55CE022F6C09400D36C94 /* View */,
@@ -88,7 +88,7 @@
 				26C55CD822F6C05600D36C94 /* Info.plist */,
 				26C55CD922F6C05600D36C94 /* main.m */,
 			);
-			path = GYViewCategory;
+			path = GYBaseViewCategory;
 			sourceTree = "<group>";
 		};
 		26C55CE022F6C09400D36C94 /* View */ = {
@@ -112,9 +112,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		26C55CC622F6C05100D36C94 /* GYViewCategory */ = {
+		26C55CC622F6C05100D36C94 /* GYBaseViewCategory */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 26C55CDD22F6C05600D36C94 /* Build configuration list for PBXNativeTarget "GYViewCategory" */;
+			buildConfigurationList = 26C55CDD22F6C05600D36C94 /* Build configuration list for PBXNativeTarget "GYBaseViewCategory" */;
 			buildPhases = (
 				26C55CC322F6C05100D36C94 /* Sources */,
 				26C55CC422F6C05100D36C94 /* Frameworks */,
@@ -124,9 +124,9 @@
 			);
 			dependencies = (
 			);
-			name = GYViewCategory;
+			name = GYBaseViewCategory;
 			productName = ViewCatagory;
-			productReference = 26C55CC722F6C05100D36C94 /* GYViewCategory.app */;
+			productReference = 26C55CC722F6C05100D36C94 /* GYBaseViewCategory.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -143,7 +143,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 26C55CC222F6C05100D36C94 /* Build configuration list for PBXProject "GYViewCategory" */;
+			buildConfigurationList = 26C55CC222F6C05100D36C94 /* Build configuration list for PBXProject "GYBaseViewCategory" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -156,7 +156,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				26C55CC622F6C05100D36C94 /* GYViewCategory */,
+				26C55CC622F6C05100D36C94 /* GYBaseViewCategory */,
 			);
 		};
 /* End PBXProject section */
@@ -364,7 +364,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		26C55CC222F6C05100D36C94 /* Build configuration list for PBXProject "GYViewCategory" */ = {
+		26C55CC222F6C05100D36C94 /* Build configuration list for PBXProject "GYBaseViewCategory" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				26C55CDB22F6C05600D36C94 /* Debug */,
@@ -373,7 +373,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		26C55CDD22F6C05600D36C94 /* Build configuration list for PBXNativeTarget "GYViewCategory" */ = {
+		26C55CDD22F6C05600D36C94 /* Build configuration list for PBXNativeTarget "GYBaseViewCategory" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				26C55CDE22F6C05600D36C94 /* Debug */,
