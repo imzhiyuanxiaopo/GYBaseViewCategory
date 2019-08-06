@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
 
   spec.source       = { :git => "https://github.com/imzhiyuanxiaopo/GYBaseViewCategory.git", :tag => "#{spec.version}" }
 
-  spec.source_files  = "GYBaseViewCategory/**/*.{h,m}"
+  spec.source_files  = "GYBaseViewCategory/View/*.{h,m}"
   #spec.exclude_files = "Classes/Exclude"
 
 end
