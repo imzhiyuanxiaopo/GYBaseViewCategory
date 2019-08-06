@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
 
   spec.name         = "GYBaseViewCategory"
-  spec.version      = "0.0.1"
+  spec.version      = "0.0.2"
   spec.summary      = "视图分类"
   spec.description  = "常见视图的一些设置，采用链式编程。UITextView添加了placeholder"
 

@@ -11,6 +11,9 @@
 
 @interface ViewController ()
 
+@property (assign ,nonatomic) int i;
+@property (assign ,nonatomic) int b;
+
 @end
 
 @implementation ViewController
@@ -21,6 +24,10 @@
     UILabel *label = (UILabel *)UILabel.new.gyText(@"测试一下分类写的怎么样").gySystemFontSize(15).gyTextColorHex(0x36126d).gyAlignment(NSTextAlignmentCenter).gyBackgroundColor(UIColor.yellowColor);
     label.frame = self.view.bounds;
     [self.view addSubview:label];
+    self.i = 100;
+    self.b = self.i;
+    self.b = 200;
+    NSLog(@"%p    %p" ,&_i , &_b);
 }
 
 
