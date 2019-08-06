@@ -14,9 +14,9 @@ Pod::Spec.new do |spec|
   spec.authors            = { "gzy1992123" => "872598520@qq.com" }
   spec.platform     = :ios, "9.0"
 
-  spec.source       = { :git => "https://github.com/imzhiyuanxiaopo/GYBaseViewCategory.git", :tag => "0.0.1" }
+  spec.source       = { :git => "https://github.com/imzhiyuanxiaopo/GYBaseViewCategory.git", :tag => "#{spec.version}" }
 
-  spec.source_files  = "View/*.{h,m}"
+  spec.source_files  = "GYBaseViewCategory/*.{h,m}"
   #spec.exclude_files = "Classes/Exclude"
 
 end
