@@ -8,6 +8,8 @@
 
 #import "UITextField+GYConfig.h"
 
+#import "UIView+GYConfig.h"
+
 #import <objc/runtime.h>
 
 @interface UITextField ()
@@ -43,6 +45,55 @@ static char PHText;
             self.placeholderText = @"";
         }
         [self initPlaceholder];
+        return self;
+    };
+}
+
+- (UITextField * _Nonnull (^)(UIColor * _Nonnull))gyTextColor{
+    return ^(UIColor *color){
+        self.textColor = color;
+        return self;
+    };
+}
+
+- (UITextField * _Nonnull (^)(NSInteger))gyTextHexColor{
+    return ^(NSInteger hexColor){
+        self.textColor = [self colorWithHex:hexColor];
+        return self;
+    };
+}
+
+- (UITextField * _Nonnull (^)(UIFont * _Nonnull))gyFont{
+    return ^(UIFont *font){
+        self.font = font;
+        return self;
+    };
+}
+
+- (UITextField * _Nonnull (^)(NSTextAlignment))gyTextAligment{
+    return ^(NSTextAlignment align){
+        self.textAlignment = align;
+        return self;
+    };
+}
+
+- (UITextField * _Nonnull (^)(UIView * _Nonnull))gyLeftView{
+    return ^(UIView *view){
+        self.leftView = view;
+        return self;
+    };
+}
+
+- (UITextField * _Nonnull (^)(UIView * _Nonnull))gyRightView{
+    return ^(UIView *view){
+        self.rightView = view;
+        return self;
+    };
+}
+
+- (UITextField * _Nonnull (^)(UIKeyboardType))gyKeyboardType{
+    return ^(UIKeyboardType type){
+        self.keyboardType = type;
         return self;
     };
 }

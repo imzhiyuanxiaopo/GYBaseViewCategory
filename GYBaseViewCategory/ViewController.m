@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-#import "ViewCategoryHeader.h"
+#import "GYBaseViewHeader.h"
 
 @interface ViewController ()
 
@@ -21,13 +21,32 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    UILabel *label = (UILabel *)UILabel.new.gyText(@"测试一下分类写的怎么样").gySystemFontSize(15).gyTextColorHex(0x36126d).gyAlignment(NSTextAlignmentCenter).gyBackgroundColor(UIColor.yellowColor);
-    label.frame = self.view.bounds;
-    [self.view addSubview:label];
-    self.i = 100;
-    self.b = self.i;
-    self.b = 200;
-    NSLog(@"%p    %p" ,&_i , &_b);
+//    UILabel *label = (UILabel *)UILabel.new
+//    .gyText(@"测试一下分类写的怎么样")
+//    .gySystemFontSize(15)
+//    .gyTextHexColor(0x36126d)
+//    .gyAlignment(NSTextAlignmentCenter)
+//    .gyBackgroundColor(UIColor.yellowColor)
+//    .gyCornerRadius(56)
+//    .gyBorderWidth(5)
+//    .gyBorderHexColor(0x123456);
+//    label.frame = self.view.bounds;
+//    [self.view addSubview:label];
+    
+    UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, 300, 40)];
+    textView
+    .gyPlaceHolder(@"adsfasdfasdf")
+    .gyPlaceHolderColor(UIColor.darkGrayColor)
+    .gyBorderWidth(5)
+    .gyBorderColor(UIColor.redColor);
+    [self.view addSubview:textView];
+    UITextView *textView1 = [[UITextView alloc] initWithFrame:CGRectMake(0, 100, 300, 40)];
+    textView1
+    .gyPlaceHolder(@"中文中文中文")
+    .gyPlaceHolderColor(UIColor.darkGrayColor)
+    .gyBorderWidth(5)
+    .gyBorderColor(UIColor.orangeColor);
+    [self.view addSubview:textView1];
 }
 
 

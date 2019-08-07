@@ -12,19 +12,25 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UITextView (GYConfig)
 
-/// 设置textview字体
+/** 设置textview字体*/
 - (UITextView * (^)(UIFont * _Nonnull))gyTextViewFont;
-/// 设置字体颜色
+/** 设置字体颜色*/
 - (UITextView * (^)(UIColor * _Nonnull))gyTextColor;
+/** 16进制字体色*/
 - (UITextView * (^)(NSInteger))gyTextHexColor;
 
-/// 设置textview的占位符文本
+/** 设置textview的占位符文本*/
 - (UITextView * (^)(NSString * _Nonnull))gyPlaceHolder;
-/// 设置占位符字体
+/** 设置占位符字体
+    改字体默认跟随文本字体
+ */
 - (UITextView * (^)(UIFont * _Nonnull))gyPlaceHolderFont;
-/// 设置占位符文字颜色
+/** 设置占位符文字颜色*/
 - (UITextView * (^)(UIColor * _Nonnull))gyPlaceHolderColor;
+/** 设置占位符16进制颜色*/
 - (UITextView * (^)(NSInteger))gyPlaceHolderHexColor;
+/** 设置键盘*/
+- (UITextView * (^)(UIKeyboardType))gyKeyboardType;
 
 @end
 

@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 /** 设置文字颜色color*/
 - (UILabel * _Nonnull (^)(UIColor * _Nonnull))gyTextColor;
 /** 设置文字颜色十六进制数字(为了减少依赖  在.m文件里定义一个转换16进制颜色方法)*/
-- (UILabel * _Nonnull (^)(NSInteger))gyTextColorHex;
+- (UILabel * _Nonnull (^)(NSInteger))gyTextHexColor;
 /** 设置字体*/
 - (UILabel * _Nonnull (^)(UIFont * _Nonnull))gyFont;
 /** 设置系统字体 只传入文字大小*/
@@ -32,11 +32,18 @@ NS_ASSUME_NONNULL_BEGIN
 - (UILabel * _Nonnull (^)(NSTextAlignment))gyAlignment;
 /** 设置文字富文本*/
 - (UILabel * _Nonnull (^)(NSAttributedString * _Nonnull))gyAttributer;
+/** 文字行数*/
+- (UILabel * _Nonnull (^)(NSInteger))gyNumberOfLine;
 
 /**
  设置背景色
+ 在初始化时候可以使用
+ ex: UILabel.new.gyLabelBackgroundColor(UIColor.redColor)
+ 这种情况返回的是UILabel  不会报类型警告
  */
+/** label背景颜色*/
 - (UILabel * _Nonnull (^)(UIColor * _Nonnull))gyLabelBackgroundColor;
+/** label16进制背景色*/
 - (UILabel * _Nonnull (^)(NSInteger))gyLabelBackgroundHexColor;
 
 @end

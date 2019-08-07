@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2628B91222F802520046D847 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2628B91122F802520046D847 /* Default-568h@2x.png */; };
+		263EBD6822F96F53001BB93A /* UIImageView+GYConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 263EBD6722F96F53001BB93A /* UIImageView+GYConfig.m */; };
 		26C55CCC22F6C05100D36C94 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 26C55CCB22F6C05100D36C94 /* AppDelegate.m */; };
 		26C55CCF22F6C05100D36C94 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26C55CCE22F6C05100D36C94 /* ViewController.m */; };
 		26C55CD222F6C05100D36C94 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26C55CD022F6C05100D36C94 /* Main.storyboard */; };
@@ -23,6 +24,8 @@
 
 /* Begin PBXFileReference section */
 		2628B91122F802520046D847 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		263EBD6622F96F53001BB93A /* UIImageView+GYConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImageView+GYConfig.h"; sourceTree = "<group>"; };
+		263EBD6722F96F53001BB93A /* UIImageView+GYConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+GYConfig.m"; sourceTree = "<group>"; };
 		26C55CC722F6C05100D36C94 /* GYBaseViewCategory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GYBaseViewCategory.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		26C55CCA22F6C05100D36C94 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		26C55CCB22F6C05100D36C94 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -36,7 +39,7 @@
 		26C55CE122F6C09400D36C94 /* UIView+GYConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+GYConfig.m"; sourceTree = "<group>"; };
 		26C55CE222F6C09400D36C94 /* UILabel+GYConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+GYConfig.h"; sourceTree = "<group>"; };
 		26C55CE322F6C09400D36C94 /* UIButton+GYConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+GYConfig.h"; sourceTree = "<group>"; };
-		26C55CE422F6C09400D36C94 /* ViewCategoryHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewCategoryHeader.h; sourceTree = "<group>"; };
+		26C55CE422F6C09400D36C94 /* GYBaseViewHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GYBaseViewHeader.h; sourceTree = "<group>"; };
 		26C55CE522F6C09400D36C94 /* UIView+GYConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+GYConfig.h"; sourceTree = "<group>"; };
 		26C55CE622F6C09400D36C94 /* UILabel+GYConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+GYConfig.m"; sourceTree = "<group>"; };
 		26C55CE722F6C09400D36C94 /* UIButton+GYConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+GYConfig.m"; sourceTree = "<group>"; };
@@ -94,7 +97,7 @@
 		26C55CE022F6C09400D36C94 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				26C55CE422F6C09400D36C94 /* ViewCategoryHeader.h */,
+				26C55CE422F6C09400D36C94 /* GYBaseViewHeader.h */,
 				26C55CE322F6C09400D36C94 /* UIButton+GYConfig.h */,
 				26C55CE722F6C09400D36C94 /* UIButton+GYConfig.m */,
 				26C55CE222F6C09400D36C94 /* UILabel+GYConfig.h */,
@@ -105,6 +108,8 @@
 				26C55CEC22F6CFB800D36C94 /* UITextField+GYConfig.m */,
 				26C55CEE22F6D16200D36C94 /* UITextView+GYConfig.h */,
 				26C55CEF22F6D16200D36C94 /* UITextView+GYConfig.m */,
+				263EBD6622F96F53001BB93A /* UIImageView+GYConfig.h */,
+				263EBD6722F96F53001BB93A /* UIImageView+GYConfig.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -185,6 +190,7 @@
 				26C55CEA22F6C09400D36C94 /* UIButton+GYConfig.m in Sources */,
 				26C55CE822F6C09400D36C94 /* UIView+GYConfig.m in Sources */,
 				26C55CDA22F6C05600D36C94 /* main.m in Sources */,
+				263EBD6822F96F53001BB93A /* UIImageView+GYConfig.m in Sources */,
 				26C55CCC22F6C05100D36C94 /* AppDelegate.m in Sources */,
 				26C55CE922F6C09400D36C94 /* UILabel+GYConfig.m in Sources */,
 				26C55CF022F6D16200D36C94 /* UITextView+GYConfig.m in Sources */,

@@ -8,22 +8,24 @@
 
 #import "UIButton+GYConfig.h"
 
+#import "UIView+GYConfig.h"
+
 @implementation UIButton (GYConfig)
 
 #pragma mark - 设置各状态文字
-- (UIButton * _Nonnull (^)(NSString * _Nonnull))gyNorlText{
+- (UIButton * _Nonnull (^)(NSString * _Nonnull))gyNormalText{
     return ^(NSString *text){
         [self setTitle:text forState:UIControlStateNormal];
         return self;
     };
 }
-- (UIButton * _Nonnull (^)(NSString * _Nonnull))gySelText{
+- (UIButton * _Nonnull (^)(NSString * _Nonnull))gySelectedText{
     return ^(NSString *text){
         [self setTitle:text forState:UIControlStateSelected];
         return self;
     };
 }
-- (UIButton * _Nonnull (^)(NSString * _Nonnull))gyHiltText{
+- (UIButton * _Nonnull (^)(NSString * _Nonnull))gyHighlightedText{
     return ^(NSString *text){
         [self setTitle:text forState:UIControlStateHighlighted];
         return self;
@@ -44,38 +46,38 @@
 }
 
 #pragma mark - 各状态文字颜色
-- (UIButton * _Nonnull (^)(UIColor * _Nonnull))gyNorlTextColor{
+- (UIButton * _Nonnull (^)(UIColor * _Nonnull))gyNormalTextColor{
     return ^(UIColor *color){
         [self setTitleColor:color forState:UIControlStateNormal];
         return self;
     };
 }
-- (UIButton * _Nonnull (^)(UIColor * _Nonnull))gySelTextColor{
+- (UIButton * _Nonnull (^)(UIColor * _Nonnull))gySelectedTextColor{
     return ^(UIColor *color){
         [self setTitleColor:color forState:UIControlStateSelected];
         return self;
     };
 }
-- (UIButton * _Nonnull (^)(UIColor * _Nonnull))gyHiltTextColor{
+- (UIButton * _Nonnull (^)(UIColor * _Nonnull))gyHighlightedTextColor{
     return ^(UIColor *color){
         [self setTitleColor:color forState:UIControlStateHighlighted];
         return self;
     };
 }
 
-- (UIButton * _Nonnull (^)(NSInteger))gyNorTextHex{
+- (UIButton * _Nonnull (^)(NSInteger))gyNormalTextHexColor{
     return ^(NSInteger colorHex){
         [self setTitleColor:[self colorWithHex:colorHex] forState:UIControlStateNormal];
         return self;
     };
 }
-- (UIButton * _Nonnull (^)(NSInteger))gySelTextHex{
+- (UIButton * _Nonnull (^)(NSInteger))gySelectedTextHexColor{
     return ^(NSInteger colorHex){
         [self setTitleColor:[self colorWithHex:colorHex] forState:UIControlStateSelected];
         return self;
     };
 }
-- (UIButton * _Nonnull (^)(NSInteger))gyHiltTextHex{
+- (UIButton * _Nonnull (^)(NSInteger))gyHighlightedTextHexColor{
     return ^(NSInteger colorHex){
         [self setTitleColor:[self colorWithHex:colorHex] forState:UIControlStateHighlighted];
         return self;
@@ -96,14 +98,47 @@
     };
 }
 
-/**
- 16进制颜色转换为color
- 
- @param hexValue hexValue description
- @return return value description
- */
-- (UIColor *)colorWithHex:(NSInteger)hexValue{
-    return [UIColor colorWithRed:((float)((hexValue & 0xFF0000) >> 16)) / 255.0 green:((float)((hexValue & 0xFF00) >> 8)) / 255.0 blue:((float)(hexValue & 0xFF)) / 255.0 alpha:1.0f];
+#pragma mark - 图片的设置
+- (UIButton * _Nonnull (^)(UIImage * _Nonnull))gyNormalImage{
+    return ^(UIImage *image){
+        [self setImage:image forState:UIControlStateNormal];
+        return self;
+    };
+}
+
+- (UIButton * _Nonnull (^)(UIImage * _Nonnull))gyHighlightedImage{
+    return ^(UIImage *image){
+        [self setImage:image forState:UIControlStateHighlighted];
+        return self;
+    };
+}
+
+- (UIButton * _Nonnull (^)(UIImage * _Nonnull))gySelectedImage{
+    return ^(UIImage *image){
+        [self setImage:image forState:UIControlStateSelected];
+        return self;
+    };
+}
+
+- (UIButton * _Nonnull (^)(UIImage * _Nonnull))gyNormalBackImage{
+    return ^(UIImage *image){
+        [self setBackgroundImage:image forState:UIControlStateNormal];
+        return self;
+    };
+}
+
+- (UIButton * _Nonnull (^)(UIImage * _Nonnull))gyHighlightedBackImage{
+    return ^(UIImage *image){
+        [self setBackgroundImage:image forState:UIControlStateHighlighted];
+        return self;
+    };
+}
+
+- (UIButton * _Nonnull (^)(UIImage * _Nonnull))gySelectedBackImage{
+    return ^(UIImage *image){
+        [self setBackgroundImage:image forState:UIControlStateSelected];
+        return self;
+    };
 }
 
 @end

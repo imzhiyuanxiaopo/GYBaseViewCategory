@@ -7,39 +7,56 @@
 //
 
 #import <UIKit/UIKit.h>
-/*
- 这个分类为了减少链长度  将部分英文缩写了   正常写代码的话我估计也没有多少人会normal拼完的
- */
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface UIButton (GYConfig)
 
 #pragma mark - 设置各状态文字
-- (UIButton * _Nonnull (^)(NSString * _Nonnull))gyNorlText;
-- (UIButton * _Nonnull (^)(NSString * _Nonnull))gyHiltText;
-- (UIButton * _Nonnull (^)(NSString * _Nonnull))gySelText;
+/** 普通状态文字*/
+- (UIButton * _Nonnull (^)(NSString * _Nonnull))gyNormalText;
+/** 高亮状态文字*/
+- (UIButton * _Nonnull (^)(NSString * _Nonnull))gyHighlightedText;
+/** 选中状态文字*/
+- (UIButton * _Nonnull (^)(NSString * _Nonnull))gySelectedText;
 
 #pragma mark - 设置各状态文字颜色
-- (UIButton * _Nonnull (^)(UIColor * _Nonnull))gyNorlTextColor;
-- (UIButton * _Nonnull (^)(UIColor * _Nonnull))gyHiltTextColor;
-- (UIButton * _Nonnull (^)(UIColor * _Nonnull))gySelTextColor;
+/** 普通状态文字颜色*/
+- (UIButton * _Nonnull (^)(UIColor * _Nonnull))gyNormalTextColor;
+/** 高亮状态文字颜色*/
+- (UIButton * _Nonnull (^)(UIColor * _Nonnull))gyHighlightedTextColor;
+/** 选中状态文字颜色*/
+- (UIButton * _Nonnull (^)(UIColor * _Nonnull))gySelectedTextColor;
 
-/** 设置文字颜色十六进制数字(为了减少依赖  在.m文件里定义一个转换16进制颜色方法)*/
-- (UIButton * _Nonnull (^)(NSInteger))gyNorTextHex;
-- (UIButton * _Nonnull (^)(NSInteger))gyHiltTextHex;
-- (UIButton * _Nonnull (^)(NSInteger))gySelTextHex;
+/** 设置普通状态16进制文字颜色*/
+- (UIButton * _Nonnull (^)(NSInteger))gyNormalTextHexColor;
+/** 设置高亮状态16进制文字颜色*/
+- (UIButton * _Nonnull (^)(NSInteger))gyHighlightedTextHexColor;
+/** 设置选中状态16进制文字颜色*/
+- (UIButton * _Nonnull (^)(NSInteger))gySelectedTextHexColor;
 
-/**
- 设置背景色
- */
+/** 设置背景色*/
 - (UIButton * _Nonnull (^)(UIColor * _Nonnull))gyButtonBackgroundColor;
+/** 设置16进制背景色*/
 - (UIButton * _Nonnull (^)(NSInteger))gyButtonBackgroundHexColor;
 
 /** 设置字体*/
 - (UIButton * _Nonnull (^)(UIFont * _Nonnull))gyFont;
 /** 设置系统字体 只传入文字大小*/
 - (UIButton * _Nonnull (^)(NSInteger))gySystemFontSize;
+
+/** 按钮普通状态图片*/
+- (UIButton * _Nonnull (^)(UIImage * _Nonnull))gyNormalImage;
+/** 按钮选中状态图片*/
+- (UIButton * _Nonnull (^)(UIImage * _Nonnull))gySelectedImage;
+/** 按钮高亮状态图片*/
+- (UIButton * _Nonnull (^)(UIImage * _Nonnull))gyHighlightedImage;
+/** 按钮普通状态背景图*/
+- (UIButton * _Nonnull (^)(UIImage * _Nonnull))gyNormalBackImage;
+/** 按钮高亮状态背景图*/
+- (UIButton * _Nonnull (^)(UIImage * _Nonnull))gyHighlightedBackImage;
+/** 按钮选中状态背景图*/
+- (UIButton * _Nonnull (^)(UIImage * _Nonnull))gySelectedBackImage;
 
 @end
 

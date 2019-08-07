@@ -84,6 +84,13 @@ static char PHFONTKEY;
     };
 }
 
+- (UITextView * _Nonnull (^)(UIKeyboardType))gyKeyboardType{
+    return ^(UIKeyboardType type){
+        self.keyboardType = type;
+        return self;
+    };
+}
+
 #pragma mark - 下面是初始化
 - (UILabel *)placeHolderLabel{
     return objc_getAssociatedObject(self, &PHKEY);

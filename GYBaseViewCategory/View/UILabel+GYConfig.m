@@ -44,9 +44,16 @@
     };
 }
 
-- (UILabel * _Nonnull (^)(NSInteger))gyTextColorHex{
+- (UILabel * _Nonnull (^)(NSInteger))gyTextHexColor{
     return ^(NSInteger colorHex){
         self.textColor = [self colorWithHex:colorHex];
+        return self;
+    };
+}
+
+- (UILabel * _Nonnull (^)(NSInteger))gyNumberOfLine{
+    return ^(NSInteger number){
+        self.numberOfLines = number;
         return self;
     };
 }
