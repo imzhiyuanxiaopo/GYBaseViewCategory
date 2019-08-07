@@ -20,6 +20,7 @@
 		26C55CEA22F6C09400D36C94 /* UIButton+GYConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 26C55CE722F6C09400D36C94 /* UIButton+GYConfig.m */; };
 		26C55CED22F6CFB800D36C94 /* UITextField+GYConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 26C55CEC22F6CFB800D36C94 /* UITextField+GYConfig.m */; };
 		26C55CF022F6D16200D36C94 /* UITextView+GYConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 26C55CEF22F6D16200D36C94 /* UITextView+GYConfig.m */; };
+		26E4D1EB22FA6F77006C8C14 /* AViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E4D1EA22FA6F77006C8C14 /* AViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +48,8 @@
 		26C55CEC22F6CFB800D36C94 /* UITextField+GYConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UITextField+GYConfig.m"; sourceTree = "<group>"; };
 		26C55CEE22F6D16200D36C94 /* UITextView+GYConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UITextView+GYConfig.h"; sourceTree = "<group>"; };
 		26C55CEF22F6D16200D36C94 /* UITextView+GYConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UITextView+GYConfig.m"; sourceTree = "<group>"; };
+		26E4D1E922FA6F77006C8C14 /* AViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AViewController.h; sourceTree = "<group>"; };
+		26E4D1EA22FA6F77006C8C14 /* AViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +93,8 @@
 				26C55CD522F6C05600D36C94 /* LaunchScreen.storyboard */,
 				26C55CD822F6C05600D36C94 /* Info.plist */,
 				26C55CD922F6C05600D36C94 /* main.m */,
+				26E4D1E922FA6F77006C8C14 /* AViewController.h */,
+				26E4D1EA22FA6F77006C8C14 /* AViewController.m */,
 			);
 			path = GYBaseViewCategory;
 			sourceTree = "<group>";
@@ -191,6 +196,7 @@
 				26C55CE822F6C09400D36C94 /* UIView+GYConfig.m in Sources */,
 				26C55CDA22F6C05600D36C94 /* main.m in Sources */,
 				263EBD6822F96F53001BB93A /* UIImageView+GYConfig.m in Sources */,
+				26E4D1EB22FA6F77006C8C14 /* AViewController.m in Sources */,
 				26C55CCC22F6C05100D36C94 /* AppDelegate.m in Sources */,
 				26C55CE922F6C09400D36C94 /* UILabel+GYConfig.m in Sources */,
 				26C55CF022F6D16200D36C94 /* UITextView+GYConfig.m in Sources */,
