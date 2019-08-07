@@ -21,3 +21,5 @@ UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, 300, 4
     .gyBorderColor(UIColor.redColor);
     [self.view addSubview:textView];
 ```
+暂时支持UILabel   UIButton   UITextField   UITextView几个控件，并对textview添加了placeholder属性，使用方式类似于uitextfiled甚至更加简便。
+全是基于链式编程，如果有不了解的属性去对应控件的声明文件看即可。
