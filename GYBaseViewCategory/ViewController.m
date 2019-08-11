@@ -42,5 +42,12 @@
     NSLog(@"adfasdfasdfasdfasfa");
 }
 
+- (void)injected{
+    self.view.backgroundColor = [UIColor whiteColor];
+    UILabel *label = [UILabel new].gyText(@"asdfkjhasjldfkasdfjasf");
+    label.frame = self.view.bounds;
+    [self.view addSubview:label];
+}
+
 
 @end
