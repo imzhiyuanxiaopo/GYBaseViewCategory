@@ -10,19 +10,16 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-//struct GYCorner {
-//    BOOL leftTop;
-//    BOOL rightTop;
-//    BOOL rightBottom;
-//    BOOL leftBottom;
-//};
-//
-//typedef struct GYCorner GYCorner;
-
 @interface UIView (GYConfig)
 
-#pragma mark - 设置边线
+@property (assign, nonatomic) CGFloat gyX;
+@property (assign, nonatomic) CGFloat gyY;
+@property (assign, nonatomic) CGFloat gyWidth;
+@property (assign, nonatomic) CGFloat gyHeight;
+@property (assign, nonatomic) CGFloat gyCenterX;
+@property (assign, nonatomic) CGFloat gyCenterY;
 
+#pragma mark - 设置边线
 /**
  边线宽度
  */

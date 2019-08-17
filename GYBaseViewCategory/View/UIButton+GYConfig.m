@@ -141,4 +141,11 @@
     };
 }
 
+- (UIButton * _Nonnull (^)(SEL _Nonnull ,id _Nonnull))gyTouchInside{
+    return ^(SEL selector ,id target){
+        [self addTarget:target action:selector forControlEvents:UIControlEventTouchUpInside];
+        return self;
+    };
+}
+
 @end

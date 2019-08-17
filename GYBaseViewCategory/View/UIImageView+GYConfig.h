@@ -16,7 +16,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (UIImageView *(^)(NSString * _Nonnull imageNamed))gyImage;
 
 ///** 设置图片背景色（也可用uiview父类的方法）*/
-//- (UIImageView *(^)(UIColor * _Nonnull backgroundColor))gyImgViewBackgroundColor;
+/** 设置背景色*/
+- (UIImageView * _Nonnull (^)(UIColor * _Nonnull))gyImageViewBackgroundColor;
+/** 16进制背景色*/
+- (UIImageView * _Nonnull (^)(NSInteger))gyImageViewBackgroundHexColor;
 
 @end
 

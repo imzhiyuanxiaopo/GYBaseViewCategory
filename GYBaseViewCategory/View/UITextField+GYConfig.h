@@ -25,12 +25,19 @@ NS_ASSUME_NONNULL_BEGIN
 - (UITextField * (^)(UIFont * _Nonnull))gyFont;
 /** 文字位置*/
 - (UITextField * (^)(NSTextAlignment))gyTextAligment;
+#pragma mark - 设置左右侧视图时  如果是imageView会显示适合的大小V  自定义视图的话需要设置frame
 /** 左侧视图*/
 - (UITextField * (^)(UIView * _Nonnull))gyLeftView;
 /** 右侧视图*/
 - (UITextField * (^)(UIView * _Nonnull))gyRightView;
 /** j键盘设置*/
 - (UITextField * (^)(UIKeyboardType))gyKeyboardType;
+
+
+/** 设置背景色*/
+- (UITextField * _Nonnull (^)(UIColor * _Nonnull))gyTextFieldBackgroundColor;
+/** 16进制背景色*/
+- (UITextField * _Nonnull (^)(NSInteger))gyTextFieldBackgroundHexColor;
 
 @end
 

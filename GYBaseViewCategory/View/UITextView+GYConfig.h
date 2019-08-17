@@ -32,6 +32,14 @@ NS_ASSUME_NONNULL_BEGIN
 /** 设置键盘*/
 - (UITextView * (^)(UIKeyboardType))gyKeyboardType;
 
+/** 设置文字位置*/
+- (UITextView * (^)(NSTextAlignment))gyAlignment;
+
+/** 设置背景色*/
+- (UITextView * _Nonnull (^)(UIColor * _Nonnull))gyTextViewBackgroundColor;
+/** 16进制背景色*/
+- (UITextView * _Nonnull (^)(NSInteger))gyTextViewBackgroundHexColor;
+
 @end
 
 NS_ASSUME_NONNULL_END

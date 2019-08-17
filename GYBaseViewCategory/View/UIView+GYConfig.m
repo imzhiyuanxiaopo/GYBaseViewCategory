@@ -19,7 +19,9 @@
 
 @end
 
+// 圆角弧度key  (暂时没有使用)
 static char RADIUSKEY;
+// 圆角切图key  (暂时没有使用)
 static char CORNERKEY;
 
 @implementation UIView (GYConfig)
@@ -139,6 +141,62 @@ static char CORNERKEY;
 
 - (void)setCornerImageView:(UIImageView *)cornerImageView{
     objc_setAssociatedObject(self, &CORNERKEY, cornerImageView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (CGFloat)gyX{
+    return self.frame.origin.x;
+}
+- (void)setGyX:(CGFloat)gyX{
+    CGRect rect = self.frame;
+    rect.origin.x = gyX;
+    self.frame = rect;
+}
+
+- (CGFloat)gyY{
+    return self.frame.origin.y;
+}
+- (void)setGyY:(CGFloat)gyY{
+    CGRect rect = self.frame;
+    rect.origin.y = gyY;
+    self.frame = rect;
+}
+
+- (CGFloat)gyWidth{
+    return self.frame.size.width;
+}
+- (void)setGyWidth:(CGFloat)gyWidth{
+    CGRect rect = self.frame;
+    rect.size.width = gyWidth;
+    self.frame = rect;
+}
+
+- (CGFloat)gyHeight{
+    return self.frame.size.height;
+}
+- (void)setGyHeight:(CGFloat)gyHeight{
+    CGRect rect = self.frame;
+    rect.size.height = gyHeight;
+    self.frame = rect;
+}
+
+- (CGFloat)gyCenterX{
+    return self.frame.size.width / 2;
+}
+
+- (void)setGyCenterX:(CGFloat)gyCenterX{
+    CGRect rect = self.frame;
+    rect.origin.x = gyCenterX - self.frame.size.width / 2;
+    self.frame = rect;
+}
+
+- (CGFloat)gyCenterY{
+    return self.frame.size.height / 2;
+}
+
+- (void)setGyCenterY:(CGFloat)gyCenterY{
+    CGRect rect = self.frame;
+    rect.origin.y = gyCenterY - self.frame.size.width / 2;
+    self.frame = rect;
 }
 
 @end

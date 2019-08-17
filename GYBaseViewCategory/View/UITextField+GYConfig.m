@@ -79,14 +79,28 @@ static char PHText;
 
 - (UITextField * _Nonnull (^)(UIView * _Nonnull))gyLeftView{
     return ^(UIView *view){
+        if ([view isKindOfClass:[UIImageView class]]) {
+            UIImageView *imageView = (UIImageView *)view;
+            UIImage *image = imageView.image;
+            CGRect imageRect = CGRectMake(0, 0, image.size.width ,image.size.height);
+            view.frame = imageRect;
+        }
         self.leftView = view;
+        self.leftViewMode = UITextFieldViewModeAlways;
         return self;
     };
 }
 
 - (UITextField * _Nonnull (^)(UIView * _Nonnull))gyRightView{
     return ^(UIView *view){
+        if ([view isKindOfClass:[UIImageView class]]) {
+            UIImageView *imageView = (UIImageView *)view;
+            UIImage *image = imageView.image;
+            CGRect imageRect = CGRectMake(0, 0, image.size.width ,image.size.height);
+            view.frame = imageRect;
+        }
         self.rightView = view;
+        self.rightViewMode = UITextFieldViewModeAlways;
         return self;
     };
 }
@@ -101,6 +115,19 @@ static char PHText;
 - (void)initPlaceholder{
     NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:self.placeholderText attributes:@{NSForegroundColorAttributeName : self.placeHolderColor ,NSFontAttributeName : self.font}];
     self.attributedPlaceholder = attrString;
+}
+// 背景色
+- (UITextField * _Nonnull (^)(UIColor * _Nonnull))gyTextFieldBackgroundColor{
+    return ^(UIColor *color){
+        self.backgroundColor = color;
+        return self;
+    };
+}
+- (UITextField * _Nonnull (^)(NSInteger))gyTextFieldBackgroundHexColor{
+    return ^(NSInteger color){
+        self.backgroundColor = [self colorWithHex:color];
+        return self;
+    };
 }
 
 #pragma mark - 下面就是属性的初始化了

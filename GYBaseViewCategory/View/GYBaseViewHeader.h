@@ -14,5 +14,6 @@
 #import "UIView+GYConfig.h"
 #import "UITextField+GYConfig.h"
 #import "UITextView+GYConfig.h"
+#import "UIImageView+GYConfig.h"
 
 #endif /* ViewCatagoryHeader_h */

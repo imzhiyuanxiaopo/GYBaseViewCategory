@@ -31,11 +31,18 @@
     UITextView *textView1 = (UITextView *)UITextView.new
     .gyPlaceHolder(@"中文中文中文")
     .gyPlaceHolderColor(UIColor.darkGrayColor)
+    .gyAlignment(NSTextAlignmentCenter)
     .gyBorderWidth(5)
     .gyBorderColor(UIColor.orangeColor);
     textView1.frame = CGRectMake(0, 100, 300, 40);
     [self.view addSubview:textView1];
     
+    UITextField *textField = UITextField.new
+    .gyPlaceHolder(@"测试用的textfield")
+    .gyLeftView(UIImageView.new
+                .gyImage(@"aaa"));
+    textField.frame = CGRectMake(0, 200, 300, 40);
+    [self.view addSubview:textField];
 }
 
 - (void)dealloc{

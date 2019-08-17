@@ -17,20 +17,36 @@ static char PHFONTKEY;
 
 @interface UITextView ()
 
-/** tv显示的*/
+/** tv显示的占位符*/
 @property (strong, nonatomic) UILabel *placeHolderLabel;
-
 @property (assign, nonatomic) UIFont *placeHolderFont;
+/** 是否完成对placeHolder的设置*/
+@property (assign, nonatomic) BOOL placeHolderComplete; // 使label的frame计算只运行一次  减小cpu开销
 
 @end
+
+static char COMPLETEKEY;
 
 @implementation UITextView (GYConfig)
 
 #pragma mark - 获取真实高度
 - (void)layoutSubviews{
     [super layoutSubviews];
-    self.placeHolderLabel.frame = CGRectMake(self.textContainerInset.left + 5, self.textContainerInset.top, self.frame.size.width - self.textContainerInset.left - self.textContainerInset.right - 10, 0);
+    if (self.placeHolderComplete) {
+        return;
+    }
+    CGFloat width = self.frame.size.width - self.textContainerInset.left - self.textContainerInset.right - 10;
+    self.placeHolderLabel.frame = CGRectMake(self.textContainerInset.left + 5, self.textContainerInset.top, width, 0);
     [self.placeHolderLabel sizeToFit];
+    if (self.textAlignment == NSTextAlignmentRight) {
+        self.placeHolderLabel.gyX = self.gyWidth - 5 - self.placeHolderLabel.gyWidth;
+    }
+    if (self.textAlignment == NSTextAlignmentCenter) {
+        self.placeHolderLabel.gyCenterX = self.gyCenterX;
+    }
+    if (self.placeHolderLabel.gyWidth > 0 && self.placeHolderLabel.gyHeight > 0) {
+        self.placeHolderComplete = YES;
+    }
 }
 
 - (UITextView * _Nonnull (^)(UIFont * _Nonnull))gyTextViewFont{
@@ -91,6 +107,27 @@ static char PHFONTKEY;
     };
 }
 
+- (UITextView * _Nonnull (^)(NSTextAlignment))gyAlignment{
+    return ^(NSTextAlignment align){
+        self.textAlignment = align;
+        return self;
+    };
+}
+
+// 背景色
+- (UITextView * _Nonnull (^)(UIColor * _Nonnull))gyTextViewBackgroundColor{
+    return ^(UIColor *color){
+        self.backgroundColor = color;
+        return self;
+    };
+}
+- (UITextView * _Nonnull (^)(NSInteger))gyTextViewBackgroundHexColor{
+    return ^(NSInteger color){
+        self.backgroundColor = [self colorWithHex:color];
+        return self;
+    };
+}
+
 #pragma mark - 下面是初始化
 - (UILabel *)placeHolderLabel{
     return objc_getAssociatedObject(self, &PHKEY);
@@ -116,6 +153,14 @@ static char PHFONTKEY;
         [self addSubview:self.placeHolderLabel];
         [self setValue:self.placeHolderLabel forKey:@"_placeholderLabel"];
     }
+}
+
+- (BOOL)placeHolderComplete{
+    return (BOOL)[objc_getAssociatedObject(self, &COMPLETEKEY) boolValue];
+}
+
+- (void)setPlaceHolderComplete:(BOOL)placeHolderComplete{
+    objc_setAssociatedObject(self, &COMPLETEKEY, @(placeHolderComplete), OBJC_ASSOCIATION_ASSIGN);
 }
 
 @end
