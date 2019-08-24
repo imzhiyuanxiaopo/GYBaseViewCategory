@@ -60,6 +60,9 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (UIColor *)colorWithHex:(NSInteger)hexValue;
 
+/** touchinside点击方法*/
+- (UIView * _Nonnull (^)(void(^)(id sender)))gyGestureTap;
+
 @end
 
 NS_ASSUME_NONNULL_END

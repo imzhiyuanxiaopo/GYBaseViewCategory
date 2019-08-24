@@ -9,10 +9,11 @@
 #import "ViewController.h"
 #import "GYBaseViewHeader.h"
 
-@interface ViewController ()
+#import "Speak.h"
 
-@property (assign ,nonatomic) int i;
-@property (assign ,nonatomic) int b;
+#import "AViewController.h"
+
+@interface ViewController ()
 
 @end
 
@@ -20,8 +21,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, 300, 40)];
+    
+    UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(0, 50, 300, 40)];
     textView
     .gyPlaceHolder(@"adsfasdfasdf")
     .gyPlaceHolderColor(UIColor.darkGrayColor)
@@ -30,19 +31,50 @@
     [self.view addSubview:textView];
     UITextView *textView1 = (UITextView *)UITextView.new
     .gyPlaceHolder(@"中文中文中文")
-    .gyPlaceHolderColor(UIColor.darkGrayColor)
-    .gyAlignment(NSTextAlignmentCenter)
+    .gyPlaceHolderHexColor(0x43ab92)
+    .gyAlignment(NSTextAlignmentRight)
     .gyBorderWidth(5)
     .gyBorderColor(UIColor.orangeColor);
     textView1.frame = CGRectMake(0, 100, 300, 40);
     [self.view addSubview:textView1];
-    
+
     UITextField *textField = UITextField.new
     .gyPlaceHolder(@"测试用的textfield")
     .gyLeftView(UIImageView.new
                 .gyImage(@"aaa"));
     textField.frame = CGRectMake(0, 200, 300, 40);
     [self.view addSubview:textField];
+    
+    UIButton *button = (UIButton *)UIButton.new
+    .gyTouchInside(^(UIButton *button){
+        NSLog(@"点击了按钮");
+        AViewController *viewController = AViewController.new;
+        viewController.view.gyBackgroundColor(UIColor.whiteColor);
+        [self presentViewController:viewController animated:YES completion:nil];
+    })
+    .gyBackgroundColor(UIColor.yellowColor);
+    
+    button.frame = CGRectMake(0, 300, 300, 40);
+    [self.view addSubview:button];
+    
+    __weak typeof(self) weakSelf = self;
+    UILabel *label = (UILabel *)UILabel.new
+    .gyText(@"asdfasdf")
+    .gyTextColor(UIColor.greenColor)
+    .gyBackgroundColor(UIColor.purpleColor)
+    .gyGestureTap(^(UITapGestureRecognizer *gesture){
+        NSLog(@"点击了label%@" ,weakSelf);
+    });
+    label.frame = CGRectMake(0, 400, 300, 40);
+    [self.view addSubview:label];
+}
+
+- (void)clickView{
+    NSLog(@"sdf");
+}
+
+- (Speak *)speak1{
+    return Speak.new;
 }
 
 - (void)dealloc{

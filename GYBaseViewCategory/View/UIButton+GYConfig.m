@@ -8,7 +8,41 @@
 
 #import "UIButton+GYConfig.h"
 
+#import <objc/runtime.h>
+
 #import "UIView+GYConfig.h"
+
+static char observerkey;
+
+@interface GYButtonTarget : NSObject
+
+@property (copy ,nonatomic) void(^block)(UIButton *sender);
+- (void)clickButton:(UIButton *)button;
+
+@end
+
+@implementation GYButtonTarget
+
+- (instancetype)initWithBlock:(void(^)(UIButton *))block{
+    if ((self = [super init])) {
+        _block = [block copy];
+    }
+    return self;
+}
+
+- (void)clickButton:(UIButton *)button{
+    if (_block) {
+        _block(button);
+    }
+}
+
+@end
+
+@interface UIButton ()
+
+@property (strong, nonatomic) GYButtonTarget *observer;
+
+@end
 
 @implementation UIButton (GYConfig)
 
@@ -141,11 +175,34 @@
     };
 }
 
-- (UIButton * _Nonnull (^)(SEL _Nonnull ,id _Nonnull))gyTouchInside{
-    return ^(SEL selector ,id target){
-        [self addTarget:target action:selector forControlEvents:UIControlEventTouchUpInside];
+- (UIButton * _Nonnull (^)(void(^)(UIButton *sender)))gyTouchInside{
+    return [self gyTouchWithEvent:UIControlEventTouchUpInside];
+}
+
+- (UIButton * _Nonnull (^)(void (^ _Nonnull)(UIButton * _Nonnull)))gyTouchOutside{
+    return [self gyTouchWithEvent:UIControlEventTouchUpOutside];
+}
+
+/**
+ 点击按钮时调用的方法
+
+ @param event event description
+ */
+- (UIButton * _Nonnull (^)(void(^)(UIButton *sender)))gyTouchWithEvent:(UIControlEvents)event{
+    return ^(void(^block)(UIButton *sender)){
+        self.observer = [[GYButtonTarget alloc] initWithBlock:block];
+        [self addTarget:self.observer action:@selector(clickButton:) forControlEvents:event];
         return self;
     };
+}
+
+#pragma mark - 为按钮添加一个target属性
+- (GYButtonTarget *)observer{
+    return objc_getAssociatedObject(self, &observerkey);
+}
+
+- (void)setObserver:(GYButtonTarget *)observer{
+    objc_setAssociatedObject(self, &observerkey, observer, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 @end

@@ -10,6 +10,8 @@
 
 #import "ViewController.h"
 
+#import "GYBaseViewHeader.h"
+
 @interface AViewController ()
 
 @end
@@ -20,6 +22,21 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self.navigationController pushViewController:ViewController.new animated:YES];
+    
+    __weak typeof(self) weakself = self;
+    UILabel *label = (UILabel *)UILabel.new
+    .gyText(@"asdfasdf")
+    .gyTextColor(UIColor.greenColor)
+    .gyBackgroundColor(UIColor.purpleColor)
+    .gyGestureTap(^(UITapGestureRecognizer *gesture){
+        [weakself dismissViewControllerAnimated:YES completion:nil];
+    });
+    label.frame = CGRectMake(0, 400, 300, 40);
+    [self.view addSubview:label];
+}
+
+- (void)dealloc{
+    NSLog(@"释放了AVIEWCONTROLLER");
 }
 
 /*

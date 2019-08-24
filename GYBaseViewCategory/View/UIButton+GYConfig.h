@@ -58,7 +58,9 @@ NS_ASSUME_NONNULL_BEGIN
 /** 按钮选中状态背景图*/
 - (UIButton * _Nonnull (^)(UIImage * _Nonnull))gySelectedBackImage;
 /** touchinside点击方法*/
-- (UIButton * _Nonnull (^)(SEL _Nonnull selector ,id _Nonnull target))gyTouchInside;
+- (UIButton * _Nonnull (^)(void(^)(UIButton *sender)))gyTouchInside;
+/** touchoutside点击方法*/
+- (UIButton * _Nonnull (^)(void(^)(UIButton *sender)))gyTouchOutside;
 
 @end
 

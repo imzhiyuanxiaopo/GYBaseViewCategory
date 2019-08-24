@@ -10,12 +10,40 @@
 
 #import <objc/runtime.h>
 
+@interface GYGestureTarget : NSObject
+
+@property (copy ,nonatomic) void(^block)(id sender);
+- (void)gestureTap:(id)sender;
+
+@end
+
+@implementation GYGestureTarget
+
+- (instancetype)initWithBlock:(void(^)(id))block{
+    if ((self = [super init])) {
+        _block = block;
+    }
+    return self;
+}
+
+- (void)gestureTap:(id)sender{
+    if (_block) {
+        _block(sender);
+    }
+}
+
+@end
+
+static char const GESTURETARGETKEY;
+
 @interface UIView ()
 
 @property (assign) CGFloat radius;
 //@property (assign ,nonatomic) GYCorner corner;
 
 @property (strong ,nonatomic) UIImageView *cornerImageView;
+
+@property (strong ,nonatomic) GYGestureTarget *gyTarget;
 
 @end
 
@@ -72,14 +100,6 @@ static char CORNERKEY;
         return self;
     };
 }
-//
-//- (UIView * _Nonnull (^)(GYCorner ,CGFloat))gyCorner{
-//    return ^(GYCorner corner ,CGFloat radius){
-//        self.corner = corner;
-//        self.radius = radius;
-//        return self;
-//    };
-//}
 
 - (void)cornerImage:(CGFloat)radius{
     UIGraphicsBeginImageContextWithOptions(self.frame.size, NO, 0);
@@ -126,7 +146,25 @@ static char CORNERKEY;
     return (NSInteger)hexNumber;
 }
 
+- (UIView * _Nonnull (^)(void (^ _Nonnull)(id _Nonnull)))gyGestureTap{
+    return ^(void (^block)(id sender)){
+        self.gyTarget = [[GYGestureTarget alloc] initWithBlock:block];
+        UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self.gyTarget action:@selector(gestureTap:)];
+        self.userInteractionEnabled = YES;
+        [self addGestureRecognizer:gesture];
+        return self;
+    };
+}
+
 #pragma mark - 设置属性
+- (GYGestureTarget *)gyTarget{
+    return objc_getAssociatedObject(self, &GESTURETARGETKEY);
+}
+
+- (void)setGyTarget:(GYGestureTarget *)gyTarget{
+    objc_setAssociatedObject(self, &GESTURETARGETKEY, gyTarget, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
 - (CGFloat)radius{
     return (CGFloat)[objc_getAssociatedObject(self, &RADIUSKEY) floatValue];
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		26064F91230A7D0B0098374F /* Speak.m in Sources */ = {isa = PBXBuildFile; fileRef = 26064F90230A7D0B0098374F /* Speak.m */; };
 		2628B91222F802520046D847 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2628B91122F802520046D847 /* Default-568h@2x.png */; };
 		263EBD6822F96F53001BB93A /* UIImageView+GYConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 263EBD6722F96F53001BB93A /* UIImageView+GYConfig.m */; };
 		26C55CCC22F6C05100D36C94 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 26C55CCB22F6C05100D36C94 /* AppDelegate.m */; };
@@ -24,6 +25,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		26064F8F230A7D0B0098374F /* Speak.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Speak.h; sourceTree = "<group>"; };
+		26064F90230A7D0B0098374F /* Speak.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Speak.m; sourceTree = "<group>"; };
 		2628B91122F802520046D847 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		263EBD6622F96F53001BB93A /* UIImageView+GYConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImageView+GYConfig.h"; sourceTree = "<group>"; };
 		263EBD6722F96F53001BB93A /* UIImageView+GYConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+GYConfig.m"; sourceTree = "<group>"; };
@@ -95,6 +98,8 @@
 				26C55CD922F6C05600D36C94 /* main.m */,
 				26E4D1E922FA6F77006C8C14 /* AViewController.h */,
 				26E4D1EA22FA6F77006C8C14 /* AViewController.m */,
+				26064F8F230A7D0B0098374F /* Speak.h */,
+				26064F90230A7D0B0098374F /* Speak.m */,
 			);
 			path = GYBaseViewCategory;
 			sourceTree = "<group>";
@@ -196,6 +201,7 @@
 				26C55CE822F6C09400D36C94 /* UIView+GYConfig.m in Sources */,
 				26C55CDA22F6C05600D36C94 /* main.m in Sources */,
 				263EBD6822F96F53001BB93A /* UIImageView+GYConfig.m in Sources */,
+				26064F91230A7D0B0098374F /* Speak.m in Sources */,
 				26E4D1EB22FA6F77006C8C14 /* AViewController.m in Sources */,
 				26C55CCC22F6C05100D36C94 /* AppDelegate.m in Sources */,
 				26C55CE922F6C09400D36C94 /* UILabel+GYConfig.m in Sources */,
