@@ -63,6 +63,11 @@ NS_ASSUME_NONNULL_BEGIN
 /** touchinside点击方法*/
 - (UIView * _Nonnull (^)(void(^)(id sender)))gyGestureTap;
 
+/** touchinside长按方法*/
+- (UIView * _Nonnull (^)(void(^)(id sender)))gyGestureLongPress;
+/** 长按持续时间*/
+- (UIView * _Nonnull (^)(NSInteger duration))gyGestureLongPressDuratime;
+
 @end
 
 NS_ASSUME_NONNULL_END

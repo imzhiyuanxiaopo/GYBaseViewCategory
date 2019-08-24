@@ -29,8 +29,14 @@
     .gyTextColor(UIColor.greenColor)
     .gyBackgroundColor(UIColor.purpleColor)
     .gyGestureTap(^(UITapGestureRecognizer *gesture){
-        [weakself dismissViewControllerAnimated:YES completion:nil];
-    });
+        NSLog(@"短按");
+    })
+    .gyGestureLongPress(^(UILongPressGestureRecognizer *gesture){
+        __strong typeof(weakself) strongSelf = weakself;
+        NSLog(@"长按");
+        [strongSelf dismissViewControllerAnimated:YES completion:nil];
+    })
+    .gyGestureLongPressDuratime(1.5);
     label.frame = CGRectMake(0, 400, 300, 40);
     [self.view addSubview:label];
 }

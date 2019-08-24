@@ -40,7 +40,8 @@ static char observerkey;
 
 @interface UIButton ()
 
-@property (strong, nonatomic) GYButtonTarget *observer;
+/** 可能有多种点击事件  因此用多个targets*/
+@property (strong, nonatomic) NSMutableArray *targets;
 
 @end
 
@@ -132,6 +133,26 @@ static char observerkey;
     };
 }
 
+- (UIButton * _Nonnull (^)(UIControlState))gyButtonState{
+    return ^(UIControlState state){
+        switch (state) {
+            case UIControlStateSelected:
+                self.selected = YES;
+                break;
+            case UIControlStateNormal:
+                self.selected = NO;
+                self.highlighted = NO;
+                break;
+            case UIControlStateHighlighted:
+                self.highlighted = YES;
+                break;
+            default:
+                break;
+        }
+        return self;
+    };
+}
+
 #pragma mark - 图片的设置
 - (UIButton * _Nonnull (^)(UIImage * _Nonnull))gyNormalImage{
     return ^(UIImage *image){
@@ -190,19 +211,22 @@ static char observerkey;
  */
 - (UIButton * _Nonnull (^)(void(^)(UIButton *sender)))gyTouchWithEvent:(UIControlEvents)event{
     return ^(void(^block)(UIButton *sender)){
-        self.observer = [[GYButtonTarget alloc] initWithBlock:block];
-        [self addTarget:self.observer action:@selector(clickButton:) forControlEvents:event];
+        GYButtonTarget *target = [[GYButtonTarget alloc] initWithBlock:block];
+        [self addTarget:target action:@selector(clickButton:) forControlEvents:event];
+        NSMutableArray *targets = [self targets];
+        [targets addObject:target];
         return self;
     };
 }
 
 #pragma mark - 为按钮添加一个target属性
-- (GYButtonTarget *)observer{
-    return objc_getAssociatedObject(self, &observerkey);
-}
-
-- (void)setObserver:(GYButtonTarget *)observer{
-    objc_setAssociatedObject(self, &observerkey, observer, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+- (NSMutableArray *)targets{
+    NSMutableArray *targets = objc_getAssociatedObject(self, &observerkey);
+    if (!targets) {
+        targets = [NSMutableArray array];
+        objc_setAssociatedObject(self, &observerkey, targets, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    }
+    return targets;
 }
 
 @end

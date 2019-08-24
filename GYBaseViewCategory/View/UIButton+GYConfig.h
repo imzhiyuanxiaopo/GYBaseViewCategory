@@ -57,10 +57,16 @@ NS_ASSUME_NONNULL_BEGIN
 - (UIButton * _Nonnull (^)(UIImage * _Nonnull))gyHighlightedBackImage;
 /** 按钮选中状态背景图*/
 - (UIButton * _Nonnull (^)(UIImage * _Nonnull))gySelectedBackImage;
+
+/** 设置按钮的状态(常用为selected  highlight   normal)*/
+- (UIButton * _Nonnull (^)(UIControlState))gyButtonState;
+
 /** touchinside点击方法*/
 - (UIButton * _Nonnull (^)(void(^)(UIButton *sender)))gyTouchInside;
 /** touchoutside点击方法*/
 - (UIButton * _Nonnull (^)(void(^)(UIButton *sender)))gyTouchOutside;
+
+
 
 @end
 

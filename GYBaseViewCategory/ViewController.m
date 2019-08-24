@@ -45,19 +45,33 @@
     textField.frame = CGRectMake(0, 200, 300, 40);
     [self.view addSubview:textField];
     
+    __weak typeof(self) weakSelf = self;
     UIButton *button = (UIButton *)UIButton.new
-    .gyTouchInside(^(UIButton *button){
+    .gyNormalText(@"我是按钮") // 设置normal状态文字
+    .gySelectedText(@"我不是按钮了") // 设置选中状态的文字
+    .gyHighlightedText(@"我又特么是按钮了") // 高亮状态文字
+    .gyNormalTextHexColor(0x518369) // 设置文字16进制颜色（通过color设置颜色另有方法）
+    .gySelectedTextHexColor(0x53ab11)
+    .gyHighlightedTextColor(UIColor.purpleColor)
+    .gyTouchInside(^(UIButton *button){ // 添加UIControlEventTouchUpInside的点击方法
+        __strong typeof(weakSelf) storngSelf = weakSelf;
         NSLog(@"点击了按钮");
         AViewController *viewController = AViewController.new;
         viewController.view.gyBackgroundColor(UIColor.whiteColor);
-        [self presentViewController:viewController animated:YES completion:nil];
+//        [storngSelf presentViewController:viewController animated:YES completion:nil];
+        button.gyButtonState(UIControlStateSelected);
     })
-    .gyBackgroundColor(UIColor.yellowColor);
-    
+    .gyTouchOutside(^(UIButton *button){ // 添加UIControlEventTouchUpOutside的点击方法
+        __strong typeof(weakSelf) storngSelf = weakSelf;
+        NSLog(@"点击了按钮  如果点击超出边界");
+        AViewController *viewController = AViewController.new;
+        viewController.view.gyBackgroundColor(UIColor.whiteColor);
+        [storngSelf presentViewController:viewController animated:YES completion:nil];
+    })
+    .gyBackgroundColor(UIColor.yellowColor); // 修改背景色（uiview分类 返回的是uiview  所以初始化时使用了(UIButton *)强行转换  取消警告  button分类后添加了设置背景色的方法）
     button.frame = CGRectMake(0, 300, 300, 40);
     [self.view addSubview:button];
     
-    __weak typeof(self) weakSelf = self;
     UILabel *label = (UILabel *)UILabel.new
     .gyText(@"asdfasdf")
     .gyTextColor(UIColor.greenColor)

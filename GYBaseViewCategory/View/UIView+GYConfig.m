@@ -13,6 +13,7 @@
 @interface GYGestureTarget : NSObject
 
 @property (copy ,nonatomic) void(^block)(id sender);
+
 - (void)gestureTap:(id)sender;
 
 @end
@@ -32,6 +33,10 @@
     }
 }
 
+- (void)dealloc{
+    NSLog(@"释放了%s" ,__func__);
+}
+
 @end
 
 static char const GESTURETARGETKEY;
@@ -43,7 +48,7 @@ static char const GESTURETARGETKEY;
 
 @property (strong ,nonatomic) UIImageView *cornerImageView;
 
-@property (strong ,nonatomic) GYGestureTarget *gyTarget;
+@property (strong ,nonatomic) NSMutableArray *gyTargets;
 
 @end
 
@@ -147,22 +152,50 @@ static char CORNERKEY;
 }
 
 - (UIView * _Nonnull (^)(void (^ _Nonnull)(id _Nonnull)))gyGestureTap{
+    return [self gyGesture:UITapGestureRecognizer.new];
+}
+
+- (UIView * _Nonnull (^)(void (^ _Nonnull)(id _Nonnull)))gyGestureLongPress{
+    return [self gyGesture:UILongPressGestureRecognizer.new];
+}
+
+- (UIView * _Nonnull (^)(NSInteger))gyGestureLongPressDuratime{
+    return ^(NSInteger duration){
+        NSArray <UIGestureRecognizer *>*gestureArray = self.gestureRecognizers;
+        __block UILongPressGestureRecognizer *gesture;
+        [gestureArray enumerateObjectsUsingBlock:^(UIGestureRecognizer * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            if ([obj isKindOfClass:UILongPressGestureRecognizer.class]) {
+                gesture = (UILongPressGestureRecognizer *)obj;
+            }
+        }];
+        gesture.minimumPressDuration = duration;
+        return self;
+    };
+}
+
+- (UIView * _Nonnull (^)(void (^ _Nonnull)(id _Nonnull)))gyGesture:(UIGestureRecognizer *)gesture{
     return ^(void (^block)(id sender)){
-        self.gyTarget = [[GYGestureTarget alloc] initWithBlock:block];
-        UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self.gyTarget action:@selector(gestureTap:)];
+        GYGestureTarget *target = [[GYGestureTarget alloc] initWithBlock:block];
+        [gesture addTarget:target action:@selector(gestureTap:)];
+        if ([gesture isKindOfClass:UILongPressGestureRecognizer.class]) {
+            UILongPressGestureRecognizer *longPress = (UILongPressGestureRecognizer *)gesture;
+            longPress.minimumPressDuration = 3;
+        }
         self.userInteractionEnabled = YES;
         [self addGestureRecognizer:gesture];
+        [self.gyTargets addObject:target];
         return self;
     };
 }
 
 #pragma mark - 设置属性
-- (GYGestureTarget *)gyTarget{
-    return objc_getAssociatedObject(self, &GESTURETARGETKEY);
-}
-
-- (void)setGyTarget:(GYGestureTarget *)gyTarget{
-    objc_setAssociatedObject(self, &GESTURETARGETKEY, gyTarget, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+- (NSMutableArray *)gyTargets{
+    NSMutableArray *array = objc_getAssociatedObject(self, &GESTURETARGETKEY);
+    if (!array) {
+        array = NSMutableArray.new;
+        objc_setAssociatedObject(self, &GESTURETARGETKEY, array, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    }
+    return array;
 }
 
 - (CGFloat)radius{
