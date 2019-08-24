@@ -15,11 +15,57 @@ UIimageview暂时没想到添加什么。
 ```
 UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, 300, 40)];
     textView
-    .gyPlaceHolder(@"adsfasdfasdf")
-    .gyPlaceHolderColor(UIColor.darkGrayColor)
-    .gyBorderWidth(5)
-    .gyBorderColor(UIColor.redColor);
+    .gyPlaceHolder(@"adsfasdfasdf") // 设置占位符
+    .gyPlaceHolderColor(UIColor.darkGrayColor) // 设置占位符颜色
+    .gyBorderWidth(5) // 设置边线
+    .gyBorderColor(UIColor.redColor); // 边线颜色  有设置16进制颜色方法
     [self.view addSubview:textView];
+```
+```
+__weak typeof(self) weakSelf = self;
+    UIButton *button = (UIButton *)UIButton.new
+    .gyNormalText(@"我是按钮") // 设置normal状态文字
+    .gySelectedText(@"我不是按钮了") // 设置选中状态的文字
+    .gyHighlightedText(@"我又特么是按钮了") // 高亮状态文字
+    .gyNormalTextHexColor(0x518369) // 设置文字16进制颜色（通过color设置颜色另有方法）
+    .gySelectedTextHexColor(0x53ab11) // 设置按钮选中文字颜色
+    .gyHighlightedTextColor(UIColor.purpleColor) // 设置高亮文字颜色
+    .gyTouchInside(^(UIButton *button){ // 添加UIControlEventTouchUpInside的点击方法 注意循环引用问题
+        __strong typeof(weakSelf) storngSelf = weakSelf;  // 注意循环引用问题
+        NSLog(@"点击了按钮");
+        AViewController *viewController = AViewController.new;
+        viewController.view.gyBackgroundColor(UIColor.whiteColor);
+//        [storngSelf presentViewController:viewController animated:YES completion:nil];
+        button.gyButtonState(UIControlStateSelected);
+    })
+    .gyTouchOutside(^(UIButton *button){ // 添加UIControlEventTouchUpOutside的点击方法 注意循环引用问题
+        __strong typeof(weakSelf) storngSelf = weakSelf; // 注意循环引用问题
+        NSLog(@"点击了按钮  如果点击超出边界");
+        AViewController *viewController = AViewController.new;
+        viewController.view.gyBackgroundColor(UIColor.whiteColor);
+        [storngSelf presentViewController:viewController animated:YES completion:nil];
+    })
+    .gyBackgroundColor(UIColor.yellowColor); // 修改背景色（uiview分类 返回的是uiview  所以初始化时使用了(UIButton *)强行转换  取消警告  button分类后添加了设置背景色的方法）
+    button.frame = CGRectMake(0, 300, 300, 40);
+    [self.view addSubview:button];
+```
+```
+__weak typeof(self) weakself = self;
+    UILabel *label = (UILabel *)UILabel.new
+    .gyText(@"asdfasdf") // 设置label文字
+    .gyTextColor(UIColor.greenColor) // 设置文字颜色
+    .gyBackgroundColor(UIColor.purpleColor) // 背景色
+    .gyGestureTap(^(UITapGestureRecognizer *gesture){ // 点击事件  注意循环引用
+        NSLog(@"短按");
+    })
+    .gyGestureLongPress(^(UILongPressGestureRecognizer *gesture){ // 长按事件 注意循环引用
+        __strong typeof(weakself) strongSelf = weakself;
+        NSLog(@"长按");
+        [strongSelf dismissViewControllerAnimated:YES completion:nil];
+    })
+    .gyGestureLongPressDuratime(1.5); // 设置长按事件事件  如果添加在前面会无效 暂时考虑如果设置时间就有长按方法 
+    label.frame = CGRectMake(0, 400, 300, 40);
+    [self.view addSubview:label];
 ```
 暂时支持UILabel   UIButton   UITextField   UITextView几个控件，并对textview添加了placeholder属性，使用方式类似于uitextfiled甚至更加简便。
 全是基于链式编程，如果有不了解的属性去对应控件的声明文件看即可。
