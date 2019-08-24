@@ -54,7 +54,6 @@
     .gySelectedTextHexColor(0x53ab11)
     .gyHighlightedTextColor(UIColor.purpleColor)
     .gyTouchInside(^(UIButton *button){ // 添加UIControlEventTouchUpInside的点击方法
-        __strong typeof(weakSelf) storngSelf = weakSelf;
         NSLog(@"点击了按钮");
         AViewController *viewController = AViewController.new;
         viewController.view.gyBackgroundColor(UIColor.whiteColor);
