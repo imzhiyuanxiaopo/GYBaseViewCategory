@@ -24,6 +24,7 @@
     
     UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(0, 50, 300, 40)];
     textView
+    .gyText(@"我是默认的文字  并不是placeholder哦  并且我是textView哦  不信我给您换个行您看看？ \n看出来我是textview了吧")
     .gyPlaceHolder(@"adsfasdfasdf")
     .gyPlaceHolderColor(UIColor.darkGrayColor)
     .gyBorderWidth(5)
@@ -39,6 +40,7 @@
     [self.view addSubview:textView1];
 
     UITextField *textField = UITextField.new
+    .gyPlaceHolderHexColor(0xabc418)
     .gyPlaceHolder(@"测试用的textfield")
     .gyLeftView(UIImageView.new
                 .gyImage(@"aaa"));

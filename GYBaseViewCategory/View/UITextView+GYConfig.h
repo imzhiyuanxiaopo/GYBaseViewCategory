@@ -12,6 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UITextView (GYConfig)
 
+/** 设置textview文字*/
+- (UITextView * (^)(NSString * _Nonnull))gyText;
+
 /** 设置textview字体*/
 - (UITextView * (^)(UIFont * _Nonnull))gyTextViewFont;
 /** 设置字体颜色*/

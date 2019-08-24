@@ -49,6 +49,14 @@ static char COMPLETEKEY;
     }
 }
 
+- (UITextView * _Nonnull (^)(NSString * _Nonnull))gyText{
+    return ^(NSString *text){
+        [self initLabel];
+        self.text = text;
+        return self;
+    };
+}
+
 - (UITextView * _Nonnull (^)(UIFont * _Nonnull))gyTextViewFont{
     return ^(UIFont *font){
         self.font = font;

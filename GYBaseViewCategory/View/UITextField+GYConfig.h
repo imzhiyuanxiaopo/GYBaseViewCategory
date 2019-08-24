@@ -12,11 +12,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UITextField (GYConfig)
 
+/** 设置textfield文字*/
+- (UITextField * (^)(NSString * _Nonnull))gyText;
+
 #pragma mark - 占位符设置
 /** 占位符文字*/
 - (UITextField * (^)(NSString * _Nonnull))gyPlaceHolder;
 /** 占位符文字颜色*/
 - (UITextField * (^)(UIColor * _Nonnull))gyPlaceHolderColor;
+/** 占位符16进制文字颜色*/
+- (UITextField * (^)(NSInteger))gyPlaceHolderHexColor;
 /** 文字颜色*/
 - (UITextField * (^)(UIColor * _Nonnull))gyTextColor;
 /** 16进制文字颜色*/

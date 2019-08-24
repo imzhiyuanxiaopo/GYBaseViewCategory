@@ -26,6 +26,13 @@ static char PHText;
 
 @implementation UITextField (GYConfig)
 
+- (UITextField * _Nonnull (^)(NSString * _Nonnull))gyText{
+    return ^(NSString *text){
+        self.text = text;
+        return self;
+    };
+}
+
 - (UITextField * _Nonnull (^)(NSString * _Nonnull))gyPlaceHolder{
     return ^(NSString *placeH){
         self.placeholderText = placeH;
@@ -41,6 +48,17 @@ static char PHText;
 - (UITextField * _Nonnull (^)(UIColor * _Nonnull))gyPlaceHolderColor{
     return ^(UIColor *color){
         self.placeHolderColor = color;
+        if (!self.placeholderText) {
+            self.placeholderText = @"";
+        }
+        [self initPlaceholder];
+        return self;
+    };
+}
+
+- (UITextField * _Nonnull (^)(NSInteger))gyPlaceHolderHexColor{
+    return ^(NSInteger hexColor){
+        self.placeHolderColor = [self colorWithHex:hexColor];
         if (!self.placeholderText) {
             self.placeholderText = @"";
         }
