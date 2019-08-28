@@ -67,6 +67,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (UIView * _Nonnull (^)(void(^)(id sender)))gyGestureLongPress;
 /** 长按持续时间*/
 - (UIView * _Nonnull (^)(NSInteger duration))gyGestureLongPressDuratime;
+/** 自定义圆角*/
+- (UIView * _Nonnull (^)(UIRectCorner))gyCustomCornerRadius;
 
 @end
 

@@ -57,8 +57,8 @@
     .gyHighlightedTextColor(UIColor.purpleColor)
     .gyTouchInside(^(UIButton *button){ // 添加UIControlEventTouchUpInside的点击方法
         NSLog(@"点击了按钮");
-        AViewController *viewController = AViewController.new;
-        viewController.view.gyBackgroundColor(UIColor.whiteColor);
+//        AViewController *viewController = AViewController.new;
+//        viewController.view.gyBackgroundColor(UIColor.whiteColor);
 //        [storngSelf presentViewController:viewController animated:YES completion:nil];
         button.gyButtonState(UIControlStateSelected);
     })
@@ -66,7 +66,7 @@
         __strong typeof(weakSelf) storngSelf = weakSelf;
         NSLog(@"点击了按钮  如果点击超出边界");
         AViewController *viewController = AViewController.new;
-        viewController.view.gyBackgroundColor(UIColor.whiteColor);
+//        viewController.view.gyBackgroundColor(UIColor.whiteColor);
         [storngSelf presentViewController:viewController animated:YES completion:nil];
     })
     .gyBackgroundColor(UIColor.yellowColor); // 修改背景色（uiview分类 返回的是uiview  所以初始化时使用了(UIButton *)强行转换  取消警告  button分类后添加了设置背景色的方法）

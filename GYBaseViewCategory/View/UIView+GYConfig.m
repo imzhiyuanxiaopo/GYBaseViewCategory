@@ -43,21 +43,35 @@ static char const GESTURETARGETKEY;
 
 @interface UIView ()
 
-@property (assign) CGFloat radius;
-//@property (assign ,nonatomic) GYCorner corner;
-
-@property (strong ,nonatomic) UIImageView *cornerImageView;
+/// 圆角属性相关
+@property (assign ,nonatomic) CGFloat radius;
+@property (assign ,nonatomic) UIRectCorner corner;
 
 @property (strong ,nonatomic) NSMutableArray *gyTargets;
 
 @end
 
-// 圆角弧度key  (暂时没有使用)
+// 圆角弧度key
 static char RADIUSKEY;
-// 圆角切图key  (暂时没有使用)
+// 圆角切图key
 static char CORNERKEY;
 
 @implementation UIView (GYConfig)
+
+- (void)layoutSubviews{
+    if (self.corner && self.radius) {
+        [self cornerImage:self.radius];
+    }else{
+        if (!self.corner && self.radius) {
+            self.corner = 15;
+            [self cornerImage:self.radius];
+        }
+        if (self.corner && !self.radius) {
+            self.radius = MIN(self.gyWidth / 2,self.gyHeight / 2);
+            [self cornerImage:self.radius];
+        }
+    }
+}
 
 - (UIView * _Nonnull (^)(CGFloat))gyBorderWidth{
     return ^(CGFloat bw){
@@ -94,38 +108,34 @@ static char CORNERKEY;
 - (UIView * _Nonnull (^)(CGFloat))gyCornerRadius{
     return ^(CGFloat radius){
         self.radius = radius;
-        self.layer.cornerRadius = radius;
-        self.layer.masksToBounds = YES;
-//        if ([self isMemberOfClass:[UITextView class]] || [self isMemberOfClass:[UITextField class]]) {
-//            self.layer.cornerRadius = radius;
-//            self.layer.masksToBounds = YES;
-//        }else{
-//            [self cornerImage:self.radius];
-//        }
+        //        [self cornerImageView];
         return self;
     };
 }
 
+/**
+ 自己切圆角图片
+ 
+ @param radius radius description
+ */
 - (void)cornerImage:(CGFloat)radius{
-    UIGraphicsBeginImageContextWithOptions(self.frame.size, NO, 0);
-    CGContextRef cxt = UIGraphicsGetCurrentContext();
-    
-    CGContextSetFillColorWithColor(cxt, [UIColor whiteColor].CGColor);
-    CGContextSetStrokeColorWithColor(cxt, [UIColor whiteColor].CGColor);
-    
-    CGContextMoveToPoint(cxt, self.frame.size.width, self.frame.size.height-self.radius);
-    CGContextAddArcToPoint(cxt, self.frame.size.width, self.frame.size.height, self.frame.size.width-self.radius, self.frame.size.height, self.radius);//右下角
-    CGContextAddArcToPoint(cxt, 0, self.frame.size.height, 0, self.frame.size.height-self.radius, self.radius);//左下角
-    CGContextAddArcToPoint(cxt, 0, 0, self.radius, 0, self.radius);//左上角
-    CGContextAddArcToPoint(cxt, self.frame.size.width, 0, self.frame.size.width, self.radius, self.radius);//右上角
-    CGContextClosePath(cxt);
-    CGContextDrawPath(cxt, kCGPathFillStroke);
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    self.cornerImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
-    [self.cornerImageView setImage:image];
-    self.cornerImageView.gyBackgroundColor(UIColor.whiteColor);
-    [self insertSubview:self.cornerImageView atIndex:0];
+    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:self.bounds byRoundingCorners:self.corner cornerRadii:CGSizeMake(self.radius, self.radius)];
+    NSLog(@"%ld" ,self.corner);
+    CAShapeLayer *maskLayer = [[CAShapeLayer alloc]init];
+    //设置大小
+    maskLayer.frame = self.bounds;
+    //设置图形样子
+    maskLayer.path = maskPath.CGPath;
+    self.layer.mask = maskLayer;
+}
+
+- (UIView * _Nonnull (^)(UIRectCorner))gyCustomCornerRadius{
+    return ^(UIRectCorner corner){
+        self.corner = corner;
+        NSLog(@"%ld" ,corner);
+        //        [self cornerImageView];
+        return self;
+    };
 }
 
 /**
@@ -140,7 +150,7 @@ static char CORNERKEY;
 
 /**
  16进制字符串转16进制数字
-
+ 
  @param hexString hexString description
  @return return value description
  */
@@ -151,6 +161,7 @@ static char CORNERKEY;
     return (NSInteger)hexNumber;
 }
 
+#pragma mark - 添加视图的手势
 - (UIView * _Nonnull (^)(void (^ _Nonnull)(id _Nonnull)))gyGestureTap{
     return [self gyGesture:UITapGestureRecognizer.new];
 }
@@ -206,14 +217,15 @@ static char CORNERKEY;
     objc_setAssociatedObject(self, &RADIUSKEY, @(radius), OBJC_ASSOCIATION_ASSIGN);
 }
 
-- (UIImageView *)cornerImageView{
-    return objc_getAssociatedObject(self, &CORNERKEY);
+- (UIRectCorner)corner{
+    return (NSInteger)[objc_getAssociatedObject(self, &CORNERKEY) integerValue];
 }
 
-- (void)setCornerImageView:(UIImageView *)cornerImageView{
-    objc_setAssociatedObject(self, &CORNERKEY, cornerImageView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+- (void)setCorner:(UIRectCorner)corner{
+    objc_setAssociatedObject(self, &CORNERKEY, @(corner), OBJC_ASSOCIATION_ASSIGN);
 }
 
+#pragma mark - view的frame属性
 - (CGFloat)gyX{
     return self.frame.origin.x;
 }
