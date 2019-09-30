@@ -22,6 +22,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    
     UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(0, 50, 300, 40)];
     textView
     .gyText(@"我是默认的文字  并不是placeholder哦  并且我是textView哦  不信我给您换个行您看看？ \n看出来我是textview了吧")
@@ -35,7 +36,8 @@
     .gyPlaceHolderHexColor(0x43ab92)
     .gyAlignment(NSTextAlignmentRight)
     .gyBorderWidth(5)
-    .gyBorderColor(UIColor.orangeColor);
+    .gyBorderColor(UIColor.orangeColor)
+    .gyCustomCornerRadius(UIRectCornerTopRight | UIRectCornerTopLeft);
     textView1.frame = CGRectMake(0, 100, 300, 40);
     [self.view addSubview:textView1];
 
@@ -48,6 +50,7 @@
     [self.view addSubview:textField];
     
     __weak typeof(self) weakSelf = self;
+    __block int i = 0;
     UIButton *button = (UIButton *)UIButton.new
     .gyNormalText(@"我是按钮") // 设置normal状态文字
     .gySelectedText(@"我不是按钮了") // 设置选中状态的文字
@@ -55,11 +58,14 @@
     .gyNormalTextHexColor(0x518369) // 设置文字16进制颜色（通过color设置颜色另有方法）
     .gySelectedTextHexColor(0x53ab11)
     .gyHighlightedTextColor(UIColor.purpleColor)
+    .gyButtonLimit(^(){// 添加按钮点击限制  会屏蔽所有的动画效果  动画暂时做了这一个
+        BOOL canClick = i <= 3;
+        return canClick;
+    })
     .gyTouchInside(^(UIButton *button){ // 添加UIControlEventTouchUpInside的点击方法
         NSLog(@"点击了按钮");
-//        AViewController *viewController = AViewController.new;
-//        viewController.view.gyBackgroundColor(UIColor.whiteColor);
-//        [storngSelf presentViewController:viewController animated:YES completion:nil];
+        i ++;
+        __strong typeof(weakSelf) storngSelf = weakSelf;
         button.gyButtonState(UIControlStateSelected);
     })
     .gyTouchOutside(^(UIButton *button){ // 添加UIControlEventTouchUpOutside的点击方法

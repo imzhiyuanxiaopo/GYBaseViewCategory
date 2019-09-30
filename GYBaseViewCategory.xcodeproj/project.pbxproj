@@ -66,6 +66,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		262DC913233329C200614D3D /* Object */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Object;
+			sourceTree = "<group>";
+		};
 		26C55CBE22F6C05100D36C94 = {
 			isa = PBXGroup;
 			children = (
@@ -86,6 +93,7 @@
 		26C55CC922F6C05100D36C94 /* GYBaseViewCategory */ = {
 			isa = PBXGroup;
 			children = (
+				262DC913233329C200614D3D /* Object */,
 				26C55CE022F6C09400D36C94 /* View */,
 				26C55CCA22F6C05100D36C94 /* AppDelegate.h */,
 				26C55CCB22F6C05100D36C94 /* AppDelegate.m */,
@@ -348,13 +356,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 5;
+				DEVELOPMENT_TEAM = X25H8723Q8;
 				INFOPLIST_FILE = GYBaseViewCategory/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 0.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.gzy.ViewCatagory;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -366,13 +376,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 5;
+				DEVELOPMENT_TEAM = X25H8723Q8;
 				INFOPLIST_FILE = GYBaseViewCategory/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 0.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.gzy.ViewCatagory;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";

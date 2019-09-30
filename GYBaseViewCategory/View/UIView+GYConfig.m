@@ -44,10 +44,16 @@ static char const GESTURETARGETKEY;
 @interface UIView ()
 
 /// 圆角属性相关
-@property (assign ,nonatomic) CGFloat radius;
-@property (assign ,nonatomic) UIRectCorner corner;
+@property (assign, nonatomic) CGFloat radius;
+@property (assign, nonatomic) UIRectCorner corner;
 
-@property (strong ,nonatomic) NSMutableArray *gyTargets;
+@property (strong, nonatomic) NSMutableArray *gyTargets;
+/// 贝塞尔路径
+@property (strong, nonatomic) UIBezierPath *bezierPath;
+/// 边框宽度
+@property (assign, nonatomic) CGFloat borderWidth;
+/// 边框颜色
+@property (strong, nonatomic) UIColor *borderColor;
 
 @end
 
@@ -55,6 +61,12 @@ static char const GESTURETARGETKEY;
 static char RADIUSKEY;
 // 圆角切图key
 static char CORNERKEY;
+// 贝塞尔路径key
+static char BEZIERPATHKEY;
+// 边框颜色key
+static char BORDERCOLORKEY;
+// 边框宽度key
+static char BORDERWIDTHKEY;
 
 @implementation UIView (GYConfig)
 
@@ -70,24 +82,32 @@ static char CORNERKEY;
             self.radius = MIN(self.gyWidth / 2,self.gyHeight / 2);
             [self cornerImage:self.radius];
         }
+        if (!self.corner && !self.radius) {
+            if (self.borderWidth) {
+                self.layer.borderWidth = self.borderWidth;
+            }
+            if (self.borderColor) {
+                self.layer.borderColor = self.borderColor.CGColor;
+            }
+        }
     }
 }
 
 - (UIView * _Nonnull (^)(CGFloat))gyBorderWidth{
     return ^(CGFloat bw){
-        self.layer.borderWidth = bw;
+        self.borderWidth = bw;
         return self;
     };
 }
 - (UIView * _Nonnull (^)(UIColor * _Nonnull))gyBorderColor{
     return ^(UIColor *color){
-        self.layer.borderColor = color.CGColor;
+        self.borderColor = color;
         return self;
     };
 }
 - (UIView * _Nonnull (^)(NSInteger))gyBorderHexColor{
     return ^(NSInteger hex){
-        self.layer.borderColor = [self colorWithHex:hex].CGColor;
+        self.borderColor = [self colorWithHex:hex];
         return self;
     };
 }
@@ -119,14 +139,22 @@ static char CORNERKEY;
  @param radius radius description
  */
 - (void)cornerImage:(CGFloat)radius{
-    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:self.bounds byRoundingCorners:self.corner cornerRadii:CGSizeMake(self.radius, self.radius)];
+    self.bezierPath = [UIBezierPath bezierPathWithRoundedRect:self.bounds byRoundingCorners:self.corner cornerRadii:CGSizeMake(self.radius, self.radius)];
     NSLog(@"%ld" ,self.corner);
     CAShapeLayer *maskLayer = [[CAShapeLayer alloc]init];
     //设置大小
     maskLayer.frame = self.bounds;
     //设置图形样子
-    maskLayer.path = maskPath.CGPath;
+    maskLayer.path = self.bezierPath.CGPath;
     self.layer.mask = maskLayer;
+    
+    CAShapeLayer *borderLayer=[CAShapeLayer layer];
+    borderLayer.path= self.bezierPath.CGPath;
+    borderLayer.fillColor  = [UIColor clearColor].CGColor;
+    borderLayer.strokeColor= self.borderColor.CGColor;
+    borderLayer.lineWidth= self.borderWidth * 2;
+    borderLayer.frame=self.bounds;
+    [self.layer addSublayer:borderLayer];
 }
 
 - (UIView * _Nonnull (^)(UIRectCorner))gyCustomCornerRadius{
@@ -223,6 +251,30 @@ static char CORNERKEY;
 
 - (void)setCorner:(UIRectCorner)corner{
     objc_setAssociatedObject(self, &CORNERKEY, @(corner), OBJC_ASSOCIATION_ASSIGN);
+}
+
+- (UIBezierPath *)bezierPath{
+    return objc_getAssociatedObject(self, &BEZIERPATHKEY);
+}
+
+- (void)setBezierPath:(UIBezierPath *)bezierPath{
+    objc_setAssociatedObject(self, &BEZIERPATHKEY, bezierPath, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (CGFloat)borderWidth{
+    return [objc_getAssociatedObject(self, &BORDERWIDTHKEY) floatValue];
+}
+
+- (void)setBorderWidth:(CGFloat)borderWidth{
+    objc_setAssociatedObject(self, &BORDERWIDTHKEY, @(borderWidth), OBJC_ASSOCIATION_ASSIGN);
+}
+
+- (UIColor *)borderColor{
+    return objc_getAssociatedObject(self, &BORDERCOLORKEY);
+}
+
+- (void)setBorderColor:(UIColor *)borderColor{
+    objc_setAssociatedObject(self, &BORDERCOLORKEY, borderColor, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 #pragma mark - view的frame属性

@@ -65,8 +65,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (UIButton * _Nonnull (^)(void(^)(UIButton *sender)))gyTouchInside;
 /** touchoutside点击方法*/
 - (UIButton * _Nonnull (^)(void(^)(UIButton *sender)))gyTouchOutside;
-
-
+/// 按钮点击限制  默认动画为缩放模式
+- (UIButton * _Nonnull (^)(BOOL(^)(void)))gyButtonLimit;
 
 @end
 

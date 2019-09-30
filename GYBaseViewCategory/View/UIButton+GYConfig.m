@@ -21,6 +21,15 @@ static char observerkey;
 
 @end
 
+@interface UIButton ()
+
+/** 可能有多种点击事件  因此用多个targets*/
+@property (strong, nonatomic) NSMutableArray *targets;
+/// 是否可以点击按钮
+@property (copy, nonatomic) BOOL(^canClickButton)(void);
+
+@end
+
 @implementation GYButtonTarget
 
 - (instancetype)initWithBlock:(void(^)(UIButton *))block{
@@ -32,18 +41,22 @@ static char observerkey;
 
 - (void)clickButton:(UIButton *)button{
     if (_block) {
+        if (button.canClickButton && !button.canClickButton()) {
+            CAKeyframeAnimation *frameAnimation = [CAKeyframeAnimation animationWithKeyPath:@"transform.scale"];
+            frameAnimation.values = @[@1.0 ,@1.2 ,@0.8 ,@1.2 ,@0.8 ,@1.2 ,@1.0];
+            frameAnimation.duration = 0.55;
+            frameAnimation.repeatCount = 1;
+            frameAnimation.autoreverses = NO;
+            [button.layer addAnimation:frameAnimation forKey:@"scale"];
+            return;
+        }
         _block(button);
     }
 }
 
 @end
 
-@interface UIButton ()
-
-/** 可能有多种点击事件  因此用多个targets*/
-@property (strong, nonatomic) NSMutableArray *targets;
-
-@end
+static char buttonlimit_key;
 
 @implementation UIButton (GYConfig)
 
@@ -219,6 +232,13 @@ static char observerkey;
     };
 }
 
+- (UIButton * _Nonnull (^)(BOOL (^ _Nonnull)(void)))gyButtonLimit{
+    return ^(BOOL(^block)(void)){
+        self.canClickButton = block;
+        return self;
+    };
+}
+
 #pragma mark - 为按钮添加一个target属性
 - (NSMutableArray *)targets{
     NSMutableArray *targets = objc_getAssociatedObject(self, &observerkey);
@@ -227,6 +247,14 @@ static char observerkey;
         objc_setAssociatedObject(self, &observerkey, targets, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
     return targets;
+}
+
+- (BOOL (^)(void))canClickButton{
+    return objc_getAssociatedObject(self, &buttonlimit_key);
+}
+
+- (void)setCanClickButton:(BOOL (^)(void))canClickButton{
+    objc_setAssociatedObject(self, &buttonlimit_key, canClickButton, OBJC_ASSOCIATION_COPY_NONATOMIC);
 }
 
 @end
